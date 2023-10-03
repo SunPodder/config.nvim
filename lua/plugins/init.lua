@@ -1,6 +1,6 @@
 vim.cmd [[packadd packer.nvim]]
 
-plugins = require("packer").startup(function(use)
+local plugins = require("packer").startup(function(use)
 	use "wbthomason/packer.nvim"
 
 	-- lsp
@@ -47,7 +47,7 @@ plugins = require("packer").startup(function(use)
 	use {
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
-    	requires = { 
+    	requires = {
 			"nvim-lua/plenary.nvim",
       		"nvim-tree/nvim-web-devicons",
       		"MunifTanjim/nui.nvim",
@@ -84,7 +84,7 @@ plugins = require("packer").startup(function(use)
 		"dracula/vim",
 		-- "tanvirtin/monokai.nvim"
 		"sainnhe/sonokai",
-		"folke/tokyonight.nvim",	
+		"folke/tokyonight.nvim",
 	}
 
 	-- icons
