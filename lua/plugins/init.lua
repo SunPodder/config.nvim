@@ -2,6 +2,7 @@ vim.cmd [[packadd packer.nvim]]
 
 local plugins = require("packer").startup(function(use)
 	use "wbthomason/packer.nvim"
+	use "nvim-lua/plenary.nvim"
 
 	-- lsp
 	use "neovim/nvim-lspconfig"
@@ -24,8 +25,16 @@ local plugins = require("packer").startup(function(use)
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		-- "f3fora/cmp-spell"
+		-- "f3fora/cmp-spell",
+		"folke/neodev.nvim"
 	}
+
+
+	-- git integration
+	use 'tanvirtin/vgit.nvim'
+
+
+	use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
 
 	-- syntax
 	use {
@@ -48,7 +57,6 @@ local plugins = require("packer").startup(function(use)
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
     	requires = {
-			"nvim-lua/plenary.nvim",
       		"nvim-tree/nvim-web-devicons",
       		"MunifTanjim/nui.nvim",
     	}
@@ -111,6 +119,9 @@ require("plugins.config.regex")
 -- copilot suggestions in cmp window
 -- require("plugins.config.copilot")
 -- require("plugins.config.copilot_cmp")
+
+require("neodev").setup()
+require('vgit').setup()
 
 require("plugins.config.cmp")
 

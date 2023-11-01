@@ -32,7 +32,7 @@ cmp.setup({
 		["<Right>"] = cmp.mapping.scroll_docs(4),
 		["<Left>"] = cmp.mapping.scroll_docs(-4),
 		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.abort(),
+		["<ESC>"] = cmp.mapping.abort(),
 		-- ["<BS>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
