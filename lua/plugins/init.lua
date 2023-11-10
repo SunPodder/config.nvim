@@ -7,10 +7,7 @@ local plugins = require("packer").startup(function(use)
 	-- lsp
 	use "neovim/nvim-lspconfig"
 	use "williamboman/mason-lspconfig.nvim"
-	use {
-	    "williamboman/mason.nvim",
-	    run = ":MasonUpdate"
-	}
+	use "williamboman/mason.nvim"
 
 	-- snippets
 	use {
@@ -25,22 +22,16 @@ local plugins = require("packer").startup(function(use)
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
-		-- "f3fora/cmp-spell",
 		"folke/neodev.nvim"
 	}
 
-
 	-- git integration
-	use 'tanvirtin/vgit.nvim'
-
+	use "lewis6991/gitsigns.nvim"
 
 	use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
 
 	-- syntax
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate"
-	}
+	use "nvim-treesitter/nvim-treesitter"
 	use "ray-x/cmp-treesitter"
 
 	-- ai
@@ -55,42 +46,41 @@ local plugins = require("packer").startup(function(use)
 	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 	use {
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
+		branch = "v3.x",
     	requires = {
       		"nvim-tree/nvim-web-devicons",
       		"MunifTanjim/nui.nvim",
     	}
   	}
 
+	use {
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+		    vim.o.timeoutlen = 500
+		end
+	}
+	use "folke/trouble.nvim"
+
+	use "nvimdev/dashboard-nvim"
+
 	-- statusline
-	-- use "rebelot/heirline.nvim"
 	use "nvim-lualine/lualine.nvim"
 
 	-- terminal
-	use {
-		"akinsho/toggleterm.nvim",
-		tag = "*",
-	}
+	use "akinsho/toggleterm.nvim"
 
 	-- search
-	use {
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.1",
-		requires = { "nvim-lua/plenary.nvim" }
-	}
+	use "nvim-telescope/telescope.nvim"
 
 	-- utils
 	use "max397574/colortils.nvim"
 	use "windwp/nvim-autopairs"
 	use "Dhanus3133/Leetbuddy.nvim"
-	use "bennypowers/nvim-regexplainer"
-
 
 	-- themes
 	use {
-		"morhetz/gruvbox",
 		"dracula/vim",
-		-- "tanvirtin/monokai.nvim"
 		"sainnhe/sonokai",
 		"folke/tokyonight.nvim",
 	}
@@ -100,35 +90,30 @@ local plugins = require("packer").startup(function(use)
 	use "onsails/lspkind.nvim"
 end)
 
-vim.cmd("colorscheme sonokai")
+vim.cmd("colorscheme tokyonight-storm")
 
 
 -- load configs
--- require("plugins.config.heirline")
 require("plugins.config.mason")
 require("plugins.config.mason-lspconfig")
 require("plugins.config.term")
 require("plugins.config.telescope")
-require("plugins.config.tree")
 require("plugins.config.lualine")
 require("plugins.config.treesitter")
 require("plugins.config.autopairs")
 require("plugins.config.colortils")
-require("plugins.config.regex")
+require("plugins.config.neo-tree")
 
 -- copilot suggestions in cmp window
 -- require("plugins.config.copilot")
 -- require("plugins.config.copilot_cmp")
 
 require("neodev").setup()
-require('vgit').setup()
+require('gitsigns').setup()
+require("which-key").setup()
+require("plugins.config.leetbuddy")
 
 require("plugins.config.cmp")
-
-require("leetbuddy").setup({
-	domain = "com",
-	language = "py",
-})
 
 return plugins
 

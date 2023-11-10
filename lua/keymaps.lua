@@ -22,16 +22,9 @@ map("i", "<C-q>", "<ESC>:q!<CR>")
 -- map ctrl-x to quit all
 map("n", "<C-x>", ":qa<CR>")
 
--- alt-u undo
-map("n", "<A-u>", ":undo<CR>")
-map("i", "<A-u>", "<ESC>:undo<CR>")
-
 -- alt-r redo
 map("n", "<A-r>", ":redo<CR>")
 map("i", "<A-r>", "<ESC>:redo<CR>")
-
--- paste
-map("i", "<C-p>", "<ESC>\"*pa")
 
 -- ctrl-home to go to top of file
 map("n", "<C-Home>", "gg")
@@ -39,7 +32,7 @@ map("i", "<C-Home>", "<ESC>gg")
 
 -- ctrl-end to go to bottom of file
 map("n", "<C-End>", "G")
-map("i", "<C-End>", "<ESC>G")
+map("i", "<C-End>", "<ESC>Gi")
 
 map("v", "<BS>", "\"_da")
 map("v", "<DEL>", "\"_da")
@@ -51,3 +44,14 @@ map("i", "<C-z>", "<ESC>za")
 -- toggle file explorer
 map("n", "<C-f>", ":Neotree toggle<CR>")
 map("i", "<C-f>", "<ESC>:Neotree toggle<CR>")
+
+map("n", "<leader>|", ":vsplit<CR>")
+map("n", "<leader>-", ":split<CR>")
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+
