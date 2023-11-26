@@ -45,13 +45,19 @@ map("i", "<C-z>", "<ESC>za")
 map("n", "<C-f>", ":Neotree toggle<CR>")
 map("i", "<C-f>", "<ESC>:Neotree toggle<CR>")
 
+-- show diagnostics
+map("n", "<leader>d", ":TroubleToggle<CR>")
+
 map("n", "<leader>|", ":vsplit<CR>")
 map("n", "<leader>-", ":split<CR>")
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+map("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>")
+map("v", "<leader>ca", ":lua vim.lsp.buf.range_code_action()<CR>")
+map("n", "gd", ":lua vim.lsp.buf.definition()<CR>")
+map("n", "K", ":lua vim.lsp.buf.hover()<CR>")
 
+map('n', '<leader>ff', ":Telescope find_files<CR>")
+map('n', '<leader>fg', ":Telescope live_grep<CR>")
+map('n', '<leader>fb', ":Telescope buffers<CR>")
+map('n', '<leader>fh', ":Telescope help_tags<CR>")
 

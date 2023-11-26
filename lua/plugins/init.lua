@@ -28,11 +28,12 @@ local plugins = require("packer").startup(function(use)
 	-- git integration
 	use "lewis6991/gitsigns.nvim"
 
-	use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
-
 	-- syntax
 	use "nvim-treesitter/nvim-treesitter"
 	use "ray-x/cmp-treesitter"
+
+	use 'stevearc/dressing.nvim'
+	use "akinsho/flutter-tools.nvim"
 
 	-- ai
 	use {
@@ -53,15 +54,7 @@ local plugins = require("packer").startup(function(use)
     	}
   	}
 
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			vim.o.timeout = true
-		    vim.o.timeoutlen = 500
-		end
-	}
 	use "folke/trouble.nvim"
-
 	use "nvimdev/dashboard-nvim"
 
 	-- statusline
@@ -77,6 +70,15 @@ local plugins = require("packer").startup(function(use)
 	use "max397574/colortils.nvim"
 	use "windwp/nvim-autopairs"
 	use "Dhanus3133/Leetbuddy.nvim"
+	use 'numToStr/Comment.nvim'
+	use "ellisonleao/glow.nvim"
+	use {
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+		    vim.o.timeoutlen = 500
+		end
+	}
 
 	-- themes
 	use {
@@ -94,23 +96,25 @@ vim.cmd("colorscheme tokyonight-storm")
 
 
 -- load configs
-require("plugins.config.mason")
+require("mason").setup()
 require("plugins.config.mason-lspconfig")
-require("plugins.config.term")
-require("plugins.config.telescope")
+require("toggleterm").setup()
 require("plugins.config.lualine")
 require("plugins.config.treesitter")
-require("plugins.config.autopairs")
-require("plugins.config.colortils")
+require("nvim-autopairs").setup()
+require("colortils").setup()
 require("plugins.config.neo-tree")
 
 -- copilot suggestions in cmp window
--- require("plugins.config.copilot")
--- require("plugins.config.copilot_cmp")
+-- require("copilot").setup()
+-- require("copilot_cmp").setup()
 
 require("neodev").setup()
 require('gitsigns').setup()
 require("which-key").setup()
+require("flutter-tools").setup()
+require("Comment").setup()
+require("glow").setup()
 require("plugins.config.leetbuddy")
 
 require("plugins.config.cmp")

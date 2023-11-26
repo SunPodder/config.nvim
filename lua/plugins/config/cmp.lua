@@ -46,7 +46,7 @@ cmp.setup({
 			symbol_map = {
 				Copilot = "",
 			},
-			before = function(entry, vim_item)
+			before = function(_, vim_item)
 				return vim_item
 			end,
 		})
@@ -68,39 +68,5 @@ cmp.setup.cmdline(':', {
           	}
 		}
     })
-})
-
-
-
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
-
-lspconfig.tsserver.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.pyright.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.lua_ls.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.clangd.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.bashls.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.rust_analyzer.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.gopls.setup({
-	capabilities = capabilities,
 })
 
