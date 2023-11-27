@@ -59,19 +59,22 @@ local plugins = require("packer").startup(function(use)
 
 	-- statusline
 	use "nvim-lualine/lualine.nvim"
+	use 'akinsho/bufferline.nvim'
+	use "utilyre/barbecue.nvim"
+	use "SmiteshP/nvim-navic"
 
 	-- terminal
-	use "akinsho/toggleterm.nvim"
+	-- use "akinsho/toggleterm.nvim"
 
 	-- search
 	use "nvim-telescope/telescope.nvim"
 
 	-- utils
-	use "max397574/colortils.nvim"
+--	use "max397574/colortils.nvim"
 	use "windwp/nvim-autopairs"
-	use "Dhanus3133/Leetbuddy.nvim"
+--	use "Dhanus3133/Leetbuddy.nvim"
 	use 'numToStr/Comment.nvim'
-	use "ellisonleao/glow.nvim"
+--	use "ellisonleao/glow.nvim"
 	use {
 		"folke/which-key.nvim",
 		config = function()
@@ -79,30 +82,34 @@ local plugins = require("packer").startup(function(use)
 		    vim.o.timeoutlen = 500
 		end
 	}
+	use 'j-hui/fidget.nvim'
+	use 'smoka7/hop.nvim'
 
 	-- themes
 	use {
-		"dracula/vim",
-		"sainnhe/sonokai",
+--		"dracula/vim",
+--		"sainnhe/sonokai",
 		"folke/tokyonight.nvim",
 	}
+	use { "catppuccin/nvim", as = "catppuccin" }
 
 	-- icons
 	use "ryanoasis/vim-devicons"
 	use "onsails/lspkind.nvim"
 end)
 
-vim.cmd("colorscheme tokyonight-storm")
+-- vim.cmd("colorscheme tokyonight-storm")
+vim.cmd.colorscheme "catppuccin-macchiato"
 
 
 -- load configs
 require("mason").setup()
 require("plugins.config.mason-lspconfig")
-require("toggleterm").setup()
+-- require("toggleterm").setup()
 require("plugins.config.lualine")
 require("plugins.config.treesitter")
 require("nvim-autopairs").setup()
-require("colortils").setup()
+-- require("colortils").setup()
 require("plugins.config.neo-tree")
 
 -- copilot suggestions in cmp window
@@ -114,8 +121,12 @@ require('gitsigns').setup()
 require("which-key").setup()
 require("flutter-tools").setup()
 require("Comment").setup()
-require("glow").setup()
-require("plugins.config.leetbuddy")
+require("barbecue").setup()
+require("bufferline").setup()
+require("fidget").setup()
+require("hop").setup()
+-- require("glow").setup()
+-- require("plugins.config.leetbuddy")
 
 require("plugins.config.cmp")
 
