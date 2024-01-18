@@ -98,8 +98,8 @@ local plugins = require("packer").startup(function(use)
 	use "onsails/lspkind.nvim"
 end)
 
--- vim.cmd("colorscheme tokyonight-storm")
-vim.cmd.colorscheme "catppuccin-macchiato"
+vim.cmd("colorscheme tokyonight-storm")
+-- vim.cmd.colorscheme "catppuccin-macchiato"
 
 
 -- load configs
@@ -111,7 +111,7 @@ require("plugins.config.treesitter")
 require("nvim-autopairs").setup()
 -- require("colortils").setup()
 require("plugins.config.neo-tree")
-
+require("plugins.config.copilot")
 -- copilot suggestions in cmp window
 -- require("copilot").setup()
 -- require("copilot_cmp").setup()

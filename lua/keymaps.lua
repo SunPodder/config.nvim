@@ -28,7 +28,7 @@ map("i", "<A-r>", "<ESC>:redo<CR>")
 
 -- ctrl-home to go to top of file
 map("n", "<C-Home>", "gg")
-map("i", "<C-Home>", "<ESC>gg")
+map("i", "<C-Home>", "<ESC>ggi")
 
 -- ctrl-end to go to bottom of file
 map("n", "<C-End>", "G")
