@@ -116,6 +116,7 @@ require("plugins.config.copilot")
 -- require("copilot").setup()
 -- require("copilot_cmp").setup()
 
+require("dashboard").setup()
 require("neodev").setup()
 require('gitsigns').setup()
 require("which-key").setup()
