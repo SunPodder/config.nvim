@@ -15,4 +15,6 @@ require("lspconfig").rust_analyzer.setup({
 require("lspconfig").zls.setup({
 	capabilities = capabilities,
 })
-
+require("lspconfig").texlab.setup({
+	capabilities = capabilities,
+})
