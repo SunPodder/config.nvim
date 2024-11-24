@@ -10,9 +10,10 @@ local plugins = require("packer").startup(function(use)
 	use "williamboman/mason.nvim"
 
 	-- snippets
+	use "saadparwaiz1/cmp_luasnip"
 	use {
 		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip"
+		run = "make install_jsregexp"
 	}
 
 	-- completion
@@ -56,10 +57,12 @@ local plugins = require("packer").startup(function(use)
 
 	use "folke/trouble.nvim"
 	use "nvimdev/dashboard-nvim"
+	use "rcarriga/nvim-notify"
+	use "folke/noice.nvim"
 
 	-- statusline
 	use "nvim-lualine/lualine.nvim"
-	use 'akinsho/bufferline.nvim'
+	use "akinsho/bufferline.nvim"
 	use "utilyre/barbecue.nvim"
 	use "SmiteshP/nvim-navic"
 
@@ -72,9 +75,7 @@ local plugins = require("packer").startup(function(use)
 	-- utils
 --	use "max397574/colortils.nvim"
 	use "windwp/nvim-autopairs"
---	use "Dhanus3133/Leetbuddy.nvim"
 	use 'numToStr/Comment.nvim'
---	use "ellisonleao/glow.nvim"
 	use {
 		"folke/which-key.nvim",
 		config = function()
@@ -90,6 +91,7 @@ local plugins = require("packer").startup(function(use)
 --		"dracula/vim",
 --		"sainnhe/sonokai",
 		"folke/tokyonight.nvim",
+		"dylanaraps/wal.vim",
 	}
 	use { "catppuccin/nvim", as = "catppuccin" }
 
@@ -99,8 +101,7 @@ local plugins = require("packer").startup(function(use)
 end)
 
 vim.cmd("colorscheme tokyonight-storm")
--- vim.cmd.colorscheme "catppuccin-macchiato"
-
+vim.notify = require("notify")
 
 -- load configs
 require("mason").setup()
@@ -126,8 +127,7 @@ require("barbecue").setup()
 require("bufferline").setup()
 require("fidget").setup()
 require("hop").setup()
--- require("glow").setup()
--- require("plugins.config.leetbuddy")
+require("noice").setup()
 
 require("plugins.config.cmp")
 
