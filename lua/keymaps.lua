@@ -42,11 +42,13 @@ map("n", "<C-z>", "za")
 map("i", "<C-z>", "<ESC>za")
 
 -- toggle file explorer
-map("n", "<C-f>", ":Neotree toggle<CR>")
-map("i", "<C-f>", "<ESC>:Neotree toggle<CR>")
+-- map("n", "<C-f>", ":Neotree toggle<CR>")
+-- map("i", "<C-f>", "<ESC>:Neotree toggle<CR>")
 
 -- show diagnostics
-map("n", "<leader>d", ":TroubleToggle<CR>")
+map("n", "<leader>d", ":Trouble diagnostics<CR>")
+
+map("n", "hh", ":HopWord<CR>")
 
 map("n", "<leader>|", ":vsplit<CR>")
 map("n", "<leader>-", ":split<CR>")
@@ -58,6 +60,6 @@ map("n", "K", ":lua vim.lsp.buf.hover()<CR>")
 
 map('n', '<leader>ff', ":Telescope find_files<CR>")
 map('n', '<leader>fg', ":Telescope live_grep<CR>")
-map('n', '<leader>fb', ":Telescope buffers<CR>")
+map('n', '<leader>fb', ":Telescope file_browser<CR>")
 map('n', '<leader>fh', ":Telescope help_tags<CR>")
 

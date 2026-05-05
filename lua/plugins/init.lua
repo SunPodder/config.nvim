@@ -3,6 +3,12 @@ vim.cmd [[packadd packer.nvim]]
 local plugins = require("packer").startup(function(use)
 	use "wbthomason/packer.nvim"
 	use "nvim-lua/plenary.nvim"
+	use {
+		"vhyrro/luarocks.nvim",
+		opts = {
+			rocks = {  },
+		},
+	}
 
 	-- lsp
 	use "neovim/nvim-lspconfig"
@@ -33,8 +39,12 @@ local plugins = require("packer").startup(function(use)
 	use "nvim-treesitter/nvim-treesitter"
 	use "ray-x/cmp-treesitter"
 
-	use 'stevearc/dressing.nvim'
-	use "akinsho/flutter-tools.nvim"
+	use "stevearc/dressing.nvim"
+	-- use "akinsho/flutter-tools.nvim"
+	use {
+		'MeanderingProgrammer/render-markdown.nvim',
+	    after = { 'nvim-treesitter' },
+	}
 
 	-- ai
 	use {
@@ -45,32 +55,35 @@ local plugins = require("packer").startup(function(use)
 	}
 
 	-- file explorer
-	vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-	use {
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-    	requires = {
-      		"nvim-tree/nvim-web-devicons",
-      		"MunifTanjim/nui.nvim",
-    	}
-  	}
+	-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+	-- use {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	branch = "v3.x",
+ --    	requires = {
+ --      		"nvim-tree/nvim-web-devicons",
+ --      		"MunifTanjim/nui.nvim",
+ --    	}
+ --  	}
 
 	use "folke/trouble.nvim"
 	use "nvimdev/dashboard-nvim"
-	use "rcarriga/nvim-notify"
-	use "folke/noice.nvim"
+	--[[ use "rcarriga/nvim-notify" ]]
+--[[ 	use {"folke/noice.nvim", requires = "MunifTanjim/nui.nvim"} ]]
 
 	-- statusline
 	use "nvim-lualine/lualine.nvim"
 	use "akinsho/bufferline.nvim"
-	use "utilyre/barbecue.nvim"
-	use "SmiteshP/nvim-navic"
+	use {"utilyre/barbecue.nvim", requires = {"SmiteshP/nvim-navic"}}
 
 	-- terminal
 	-- use "akinsho/toggleterm.nvim"
 
 	-- search
 	use "nvim-telescope/telescope.nvim"
+	use {
+	    "nvim-telescope/telescope-file-browser.nvim",
+    	requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+	}
 
 	-- utils
 --	use "max397574/colortils.nvim"
@@ -85,23 +98,26 @@ local plugins = require("packer").startup(function(use)
 	}
 	use 'j-hui/fidget.nvim'
 	use 'smoka7/hop.nvim'
-
+	use 'https://github.com/ellisonleao/glow.nvim'
 	-- themes
 	use {
 --		"dracula/vim",
 --		"sainnhe/sonokai",
 		"folke/tokyonight.nvim",
 		"dylanaraps/wal.vim",
+		'xiyaowong/transparent.nvim',
 	}
-	use { "catppuccin/nvim", as = "catppuccin" }
+--[[ 	use { "catppuccin/nvim", as = "catppuccin" } ]]
 
 	-- icons
+	use "nvim-tree/nvim-web-devicons"
 	use "ryanoasis/vim-devicons"
 	use "onsails/lspkind.nvim"
 end)
 
+require("luarocks-nvim").setup()
 vim.cmd("colorscheme tokyonight-storm")
-vim.notify = require("notify")
+--[[ vim.notify = require("notify") ]]
 
 -- load configs
 require("mason").setup()
@@ -111,7 +127,7 @@ require("plugins.config.lualine")
 require("plugins.config.treesitter")
 require("nvim-autopairs").setup()
 -- require("colortils").setup()
-require("plugins.config.neo-tree")
+-- require("plugins.config.neo-tree")
 require("plugins.config.copilot")
 -- copilot suggestions in cmp window
 -- require("copilot").setup()
@@ -121,13 +137,15 @@ require("dashboard").setup()
 require("neodev").setup()
 require('gitsigns').setup()
 require("which-key").setup()
-require("flutter-tools").setup()
+--[[ require("flutter-tools").setup() ]]
 require("Comment").setup()
 require("barbecue").setup()
-require("bufferline").setup()
+require("plugins.config.bufferline")
 require("fidget").setup()
 require("hop").setup()
-require("noice").setup()
+--[[ require("noice").setup()  ]]
+require("trouble").setup()
+require("transparent").setup()
 
 require("plugins.config.cmp")
 

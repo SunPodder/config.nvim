@@ -35,7 +35,7 @@ cmp.setup({
 		["<ESC>"] = cmp.mapping.abort(),
 		-- ["<BS>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Insert,
+			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		})
 	},
