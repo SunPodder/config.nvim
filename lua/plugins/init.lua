@@ -1,153 +1,71 @@
-vim.cmd [[packadd packer.nvim]]
+return {
+  -- LuaRocks
+  { "vhyrro/luarocks.nvim", opts = { rocks = {} } },
 
-local plugins = require("packer").startup(function(use)
-	use "wbthomason/packer.nvim"
-	use "nvim-lua/plenary.nvim"
-	use {
-		"vhyrro/luarocks.nvim",
-		opts = {
-			rocks = {  },
-		},
-	}
+  -- LSP
+  { "neovim/nvim-lspconfig" },
+  { "williamboman/mason.nvim", opts = {} },
+  { "williamboman/mason-lspconfig.nvim", dependencies = { "williamboman/mason.nvim" }, config = "plugins.config.mason-lspconfig" },
 
-	-- lsp
-	use "neovim/nvim-lspconfig"
-	use "williamboman/mason-lspconfig.nvim"
-	use "williamboman/mason.nvim"
+  -- Snippets
+  { "saadparwaiz1/cmp_luasnip" },
+  { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 
-	-- snippets
-	use "saadparwaiz1/cmp_luasnip"
-	use {
-		"L3MON4D3/LuaSnip",
-		run = "make install_jsregexp"
-	}
+  -- Completion
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/nvim-cmp", config = "plugins.config.cmp" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
+  { "folke/neodev.nvim", opts = {} },
+  { "ray-x/cmp-treesitter" },
 
-	-- completion
-	use {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/nvim-cmp",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"folke/neodev.nvim"
-	}
+  -- Git
+  { "lewis6991/gitsigns.nvim", opts = {} },
 
-	-- git integration
-	use "lewis6991/gitsigns.nvim"
+  -- Syntax
+  { "nvim-treesitter/nvim-treesitter", config = "plugins.config.treesitter" },
+  { "stevearc/dressing.nvim" },
+  { "MeanderingProgrammer/render-markdown.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 
-	-- syntax
-	use "nvim-treesitter/nvim-treesitter"
-	use "ray-x/cmp-treesitter"
+  -- AI
+  { "github/copilot.vim", config = function()
+    vim.g.copilot_filetypes = { yaml = true, yml = true, markdown = true }
+  end },
 
-	use "stevearc/dressing.nvim"
-	-- use "akinsho/flutter-tools.nvim"
-	use {
-		'MeanderingProgrammer/render-markdown.nvim',
-	    after = { 'nvim-treesitter' },
-	}
+  -- Tools
+  { "folke/trouble.nvim", opts = {} },
+  { "nvimdev/dashboard-nvim", opts = {} },
 
-	-- ai
-	use {
-		-- "zbirenbaum/copilot.lua",
-		-- "zbirenbaum/copilot-cmp"
-		"github/copilot.vim",
-		-- "hrsh7th/cmp-copilot",
-	}
+  -- Statusline
+  { "nvim-lualine/lualine.nvim", config = "plugins.config.lualine" },
+  { "akinsho/bufferline.nvim", config = "plugins.config.bufferline" },
+  { "utilyre/barbecue.nvim", dependencies = { "SmiteshP/nvim-navic" }, opts = {} },
 
-	-- file explorer
-	-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-	-- use {
-	-- 	"nvim-neo-tree/neo-tree.nvim",
-	-- 	branch = "v3.x",
- --    	requires = {
- --      		"nvim-tree/nvim-web-devicons",
- --      		"MunifTanjim/nui.nvim",
- --    	}
- --  	}
+  -- Search
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+  { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" } },
 
-	use "folke/trouble.nvim"
-	use "nvimdev/dashboard-nvim"
-	--[[ use "rcarriga/nvim-notify" ]]
---[[ 	use {"folke/noice.nvim", requires = "MunifTanjim/nui.nvim"} ]]
+  -- Utils
+  { "nvim-lua/plenary.nvim" },
+  { "windwp/nvim-autopairs", opts = {} },
+  { "numToStr/Comment.nvim", opts = {} },
+  { "folke/which-key.nvim", opts = {}, config = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 500
+    require("which-key").setup()
+  end },
+  { "j-hui/fidget.nvim", opts = {} },
+  { "smoka7/hop.nvim", opts = {} },
+  { "ellisonleao/glow.nvim" },
 
-	-- statusline
-	use "nvim-lualine/lualine.nvim"
-	use "akinsho/bufferline.nvim"
-	use {"utilyre/barbecue.nvim", requires = {"SmiteshP/nvim-navic"}}
+  -- Themes
+  { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
+  { "dylanaraps/wal.vim" },
+  { "xiyaowong/transparent.nvim", opts = {} },
 
-	-- terminal
-	-- use "akinsho/toggleterm.nvim"
-
-	-- search
-	use "nvim-telescope/telescope.nvim"
-	use {
-	    "nvim-telescope/telescope-file-browser.nvim",
-    	requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-	}
-
-	-- utils
---	use "max397574/colortils.nvim"
-	use "windwp/nvim-autopairs"
-	use 'numToStr/Comment.nvim'
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			vim.o.timeout = true
-		    vim.o.timeoutlen = 500
-		end
-	}
-	use 'j-hui/fidget.nvim'
-	use 'smoka7/hop.nvim'
-	use 'https://github.com/ellisonleao/glow.nvim'
-	-- themes
-	use {
---		"dracula/vim",
---		"sainnhe/sonokai",
-		"folke/tokyonight.nvim",
-		"dylanaraps/wal.vim",
-		'xiyaowong/transparent.nvim',
-	}
---[[ 	use { "catppuccin/nvim", as = "catppuccin" } ]]
-
-	-- icons
-	use "nvim-tree/nvim-web-devicons"
-	use "ryanoasis/vim-devicons"
-	use "onsails/lspkind.nvim"
-end)
-
-require("luarocks-nvim").setup()
-vim.cmd("colorscheme tokyonight-storm")
---[[ vim.notify = require("notify") ]]
-
--- load configs
-require("mason").setup()
-require("plugins.config.mason-lspconfig")
--- require("toggleterm").setup()
-require("plugins.config.lualine")
-require("plugins.config.treesitter")
-require("nvim-autopairs").setup()
--- require("colortils").setup()
--- require("plugins.config.neo-tree")
-require("plugins.config.copilot")
--- copilot suggestions in cmp window
--- require("copilot").setup()
--- require("copilot_cmp").setup()
-
-require("dashboard").setup()
-require("neodev").setup()
-require('gitsigns').setup()
-require("which-key").setup()
---[[ require("flutter-tools").setup() ]]
-require("Comment").setup()
-require("barbecue").setup()
-require("plugins.config.bufferline")
-require("fidget").setup()
-require("hop").setup()
---[[ require("noice").setup()  ]]
-require("trouble").setup()
-require("transparent").setup()
-
-require("plugins.config.cmp")
-
-return plugins
-
+  -- Icons
+  { "nvim-tree/nvim-web-devicons" },
+  { "ryanoasis/vim-devicons" },
+  { "onsails/lspkind.nvim" },
+}
